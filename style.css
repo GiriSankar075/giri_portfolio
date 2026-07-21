@@ -1,0 +1,810 @@
+/* ==========================================================================
+   PORTFOLIO STYLESHEET — "PCB / Schematic" design system
+   --------------------------------------------------------------------------
+   Design tokens live in :root as CSS custom properties. Change a value here
+   and it updates everywhere it's used — that's the whole point of tokens.
+   ========================================================================== */
+
+:root {
+  /* Colour tokens — inspired by a soldered PCB under bench light */
+  --bg:            #0A0F0D;   /* substrate: near-black green-black */
+  --panel:         #0F1C16;   /* board panel surface */
+  --panel-2:       #13241C;   /* slightly lighter panel (cards on cards) */
+  --line:          #1F3329;   /* hairline borders / dividers */
+  --copper:        #B87333;   /* copper trace */
+  --copper-bright: #E3A063;   /* highlighted copper / hover */
+  --silk:          #EDEFEA;   /* silkscreen white — primary text */
+  --muted:         #8AA096;   /* secondary text, muted green-grey */
+  --signal:        #B87333;   /* LED signal accent — cyan-green */
+
+  /* Type tokens */
+  --font-display: 'Space Mono', ui-monospace, 'SF Mono', monospace;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Layout tokens */
+  --max-w: 1140px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --header-h: 76px;
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--silk);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; }
+
+::selection { background: var(--copper); color: var(--bg); }
+
+/* Visible keyboard focus everywhere — accessibility floor */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   DECORATIVE CIRCUIT-TRACE BACKGROUND
+   A fixed, low-opacity SVG-pattern layer behind all content — gives the
+   whole page a subtle "board" texture without competing with real content.
+   ========================================================================== */
+
+.board-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.18;
+  mask-image: radial-gradient(circle at 50% 0%, black, transparent 75%);
+}
+
+/* ==========================================================================
+   HEADER / NAV
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: rgba(10, 15, 13, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-wrap {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.logo-chip {
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  border: 1.5px solid var(--copper);
+  border-radius: 6px;
+  color: var(--copper-bright);
+  font-size: 0.75rem;
+  position: relative;
+}
+/* IC "pins" ticking off the chip logo, top and bottom */
+.logo-chip::before, .logo-chip::after {
+  content: "";
+  position: absolute;
+  left: 6px; right: 6px;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--copper) 0 4px, transparent 4px 8px);
+}
+.logo-chip::before { top: -4px; }
+.logo-chip::after { bottom: -4px; }
+
+.logo-text { color: var(--silk); font-size: 0.95rem; }
+.logo-text .dot { color: var(--copper-bright); }
+
+.main-nav {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  color: var(--muted);
+  position: relative;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0%; height: 2px;
+  background: var(--copper-bright);
+  transition: width 0.25s ease;
+}
+.nav-link:hover, .nav-link.active { color: var(--silk); }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+.nav-cta { margin-left: 4px; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px; height: 34px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  height: 2px;
+  background: var(--silk);
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-copper {
+  background: var(--copper);
+  color: #10130E;
+}
+.btn-copper:hover { background: var(--copper-bright); }
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--silk);
+}
+.btn-ghost:hover { border-color: var(--copper-bright); color: var(--copper-bright); }
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + 40px) 24px 60px;
+}
+
+.hero-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--copper-bright);
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ref-des {
+  border: 1px solid var(--copper);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+.hero-role {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--signal);
+  margin-bottom: 22px;
+  min-height: 1.6em;
+}
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  color: var(--signal);
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-summary {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+
+.hero-actions { display: flex; gap: 14px; margin-bottom: 32px; flex-wrap: wrap; }
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.hero-links a { border-bottom: 1px dotted var(--line); padding-bottom: 2px; }
+.hero-links a:hover { color: var(--copper-bright); border-color: var(--copper-bright); }
+
+/* ---- status panel (oscilloscope-style readout card) ---- */
+
+.status-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(184, 115, 51, 0.06), 0 30px 60px -30px rgba(0,0,0,0.6);
+}
+.status-panel::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.status-panel-head {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 8px 2px var(--signal);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 16px;
+  margin-bottom: 20px;
+}
+.status-item { display: flex; flex-direction: column; gap: 4px; }
+.status-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--copper-bright);
+}
+.status-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.status-foot {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   SECTIONS (shared)
+   ========================================================================== */
+
+.section {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 110px 24px;
+  border-top: 1px solid var(--line);
+}
+
+.section-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--copper-bright);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  margin-bottom: 18px;
+}
+
+.section-sub {
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 40px;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 68ch;
+}
+
+/* scroll-reveal: JS toggles .is-visible; CSS just defines the transition */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   SKILLS — chips styled like IC packages with pins
+   ========================================================================== */
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.skill-group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.skill-group-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--signal);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.chip {
+  position: relative;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: var(--silk);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.chip:hover {
+  border-color: var(--copper-bright);
+  transform: translateY(-2px);
+}
+.chip-tag {
+  margin-left: 6px;
+  font-size: 0.65rem;
+  color: var(--copper-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   EXPERIENCE — vertical timeline with a copper trace spine
+   ========================================================================== */
+
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: linear-gradient(var(--copper), var(--line));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+
+.timeline-node {
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--copper-bright);
+}
+.timeline-node::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+.timeline-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.timeline-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.timeline-head h3 { font-size: 1.1rem; }
+.timeline-date {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.timeline-card ul { color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
+.timeline-card li { padding-left: 16px; position: relative; }
+.timeline-card li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--copper-bright);
+}
+
+/* ==========================================================================
+   PROJECTS — cards styled like little PCB panels with mounting holes
+   ========================================================================== */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.project-card:hover {
+  border-color: var(--copper);
+  transform: translateY(-4px);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.project-card-head h3 { font-size: 1.05rem; flex: 1; }
+.mount-hole {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  flex-shrink: 0;
+}
+
+.project-card ul { color: var(--muted); display: flex; flex-direction: column; gap: 6px; font-size: 0.92rem; }
+.project-card li { padding-left: 14px; position: relative; }
+.project-card li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--copper-bright);
+}
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+.tag {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* ==========================================================================
+   EDUCATION / ACHIEVEMENTS
+   ========================================================================== */
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.edu-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+}
+.edu-card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+.edu-sub { color: var(--muted); margin-bottom: 4px; }
+.edu-meta { font-family: var(--font-display); font-size: 0.85rem; color: var(--copper-bright); }
+
+.cert-list { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
+.cert-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.cert-icon { width: 18px; height: 18px; color: var(--signal); flex-shrink: 0; margin-top: 2px; }
+
+/* ==========================================================================
+   CONTACT
+   ========================================================================== */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.contact-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.contact-card:hover { border-color: var(--copper-bright); transform: translateY(-3px); }
+.contact-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.contact-value { font-size: 0.98rem; word-break: break-word; }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 36px 24px 48px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .status-panel { order: -1; }
+}
+
+@media (max-width: 760px) {
+  .main-nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    padding: 18px 24px;
+    gap: 4px;
+    display: none;
+  }
+  .main-nav.open { display: flex; }
+  .nav-link { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .section { padding: 80px 20px; }
+}
+/* ================= HERO V2 ================= */
+
+.hero-right{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:30px;
+}
+
+.profile-card{
+
+width:325px;
+
+background:var(--panel);
+
+border:1px solid var(--line);
+
+border-radius:5px;
+
+padding:5px;
+
+text-align:center;
+
+}
+
+.profile-image{
+
+width:220px;
+
+height:220px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:5px solid var(--copper);
+
+margin:auto;
+
+display:block;
+
+}
+
+.profile-badge{
+
+margin-top:10px;
+
+padding:0.5px;
+
+background:var(--signal);
+
+color:#000;
+
+font-weight:700;
+
+border-radius:30px;
+
+font-size:14px;
+
+}
+
+.hero-greeting{
+
+color:var(--muted);
+
+font-size:18px;
+
+margin-bottom:8px;
+
+}
+
+.hero-buttons{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:14px;
+
+margin-top:30px;
+
+} 
+/* ===========================
+   PROJECT BUTTONS
+=========================== */
+
+.project-actions{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+}
+
+.project-actions .btn{
+    width:70%;
+    text-align:center;
+}
+.certificate-buttons{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:2px;
+
+margin-top:5px;
+
+} 

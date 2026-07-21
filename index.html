@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giri Sankar L — Mechatronics &amp; PCB Design Engineer</title>
+<meta name="description" content="Portfolio of Giri Sankar L, Mechatronics Engineering student specializing in PCB design, embedded systems and robotics.">
+
+<!-- Google Fonts:
+     Space Mono   -> display / technical headings (looks like PCB silkscreen text)
+     Inter        -> body copy (clean and easy to read) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Decorative circuit-trace background, sits behind everything -->
+<div class="board-bg" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="site-header" id="top">
+  <div class="nav-wrap">
+    <a href="#top" class="logo" aria-label="Giri Sankar L — home">
+      <span class="logo-chip">GS</span>
+      <span class="logo-text">Giri<span class="lightning">⚡</span>Sankar</span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">Overview</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <a href="#contact" class="btn btn-copper nav-cta">Get in touch</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+ <!-- ================= HERO ================= -->
+
+<section class="hero" id="hero">
+
+    <div class="hero-inner">
+
+        <!-- LEFT SIDE -->
+
+        <div class="hero-copy">
+
+            <p class="eyebrow">
+                <span class="ref-des">REF DES</span>
+                U1 • MECHATRONICS ENGINEER
+            </p>
+
+            <p class="hero-greeting">
+                Hello, I'm
+            </p>
+
+            <h1 class="hero-title">
+                Giri Sankar L
+            </h1>
+
+            <p class="hero-role">
+                <span id="role-typer">
+                    PCB Design • Hardware Development • Embedded Systems (learning) • Robotics
+                </span>
+            </p>
+
+            <p class="hero-summary">
+
+                B.E. Mechatronics Engineering student (2024–2028)
+                passionate about PCB design, hardware development,
+                embedded systems and robotics.
+
+                Currently developing practical engineering skills
+                through academic coursework and personal engineering
+                projects while preparing for an ISRO internship.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="assets/documents/Giri Sankar L Resume.pdf"
+                   class="btn btn-copper"
+                   target="_blank">
+
+                    Resume
+
+                </a>
+
+                <a href="#projects"
+                   class="btn btn-ghost">
+
+                    Projects
+
+                </a>
+
+                <a href="https://github.com/GiriSankar075"
+                   class="btn btn-ghost"
+                   target="_blank">
+
+                    GitHub
+
+                </a>
+
+                <a href="https://linkedin.com"
+                   class="btn btn-ghost"
+                   target="_blank">
+
+                    LinkedIn
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+         <div class="hero-right" data-reveal>
+
+            <div class="profile-card">
+
+                <img
+                    src="assets/images/Profile/profile.jpg"
+                    alt="Giri Sankar"
+                    class="profile-image">
+
+    <div class="profile-badge">
+        
+ <a href="https://github.com/GiriSankar075/GiriSankar075"
+                   class="btn btn-small btn-copper"
+                   target="_blank">
+                   
+                      Available for Internship
+                    
+                </a>
+</div>
+            </div>
+
+            <div class="status-panel">
+
+                <div class="status-panel-head">
+
+                    ENGINEERING STATUS
+
+                </div>
+
+                <div class="status-grid">
+
+                    <div class="status-item">
+
+                        <span class="status-value"
+                              data-count="8.4"
+                              data-decimals="1">
+
+                            0
+
+                        </span>
+
+                        <span class="status-label">
+
+                            CGPA
+
+                        </span>
+
+                    </div>
+
+                    <div class="status-item">
+
+                        <span class="status-value"
+                              data-count="7">
+
+                            0
+
+                        </span>
+
+                        <span class="status-label">
+
+                            Projects
+
+                        </span>
+
+                    </div>
+
+                    <div class="status-item">
+
+                        <span class="status-value"
+                              data-count="5">
+
+                            0
+
+                        </span>
+
+                        <span class="status-label">
+
+                            PCB Designs
+
+                        </span>
+
+                    </div>
+
+                    <div class="status-item">
+
+                        <span class="status-value"
+                              data-count="2028">
+
+                            0
+
+                        </span>
+
+                        <span class="status-label">
+
+                            Graduation
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <p class="section-eyebrow">C1 · overview</p>
+    <h2 class="section-title">Professional summary</h2>
+    <p class="lead" data-reveal>
+      I'm a hardware enthusiast passionate about PCB design, embedded systems
+      and robotics. I'm currently developing practical skills in custom PCB
+      design, embedded hardware and robotics through academic coursework and
+      personal engineering projects — and looking for an ISRO internship to
+      contribute to aerospace and embedded hardware technologies while
+      strengthening my engineering skills in a real-world environment.
+    </p>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section" id="skills">
+    <p class="section-eyebrow">C2 · skills</p>
+    <h2 class="section-title">Technical skills</h2>
+    <p class="section-sub">Each group below is wired up like a component bank on a board — pick a category to see the parts inside.</p>
+
+    <div class="skill-groups" data-reveal>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">Programming</h3>
+        <ul class="chip-row">
+          <li class="chip">C</li>
+          <li class="chip">C++</li>
+          <li class="chip">Python</li>
+          <li class="chip">Embedded C <span class="chip-tag">learning</span></li>
+          <li class="chip">Arduino Programming</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">PCB Design</h3>
+        <ul class="chip-row">
+          <li class="chip">EasyEDA Pro</li>
+          <li class="chip">KiCad</li>
+          <li class="chip">Altium Designer</li>
+          <li class="chip">Schematic Design</li>
+          <li class="chip">PCB Layouts</li>
+          <li class="chip">4-Layer PCB Design</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">Embedded Systems</h3>
+        <ul class="chip-row">
+          <li class="chip">Arduino Uno</li>
+          <li class="chip">RP2040</li>
+          <li class="chip">ESP32</li>
+          <li class="chip">Sensors &amp; Actuators</li>
+          <li class="chip">Motor Drivers</li>
+          <li class="chip">Servo Motors</li>
+          <li class="chip">STM32 <span class="chip-tag">learning</span></li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">Hardware Design</h3>
+        <ul class="chip-row">
+          <li class="chip">Component Selection</li>
+          <li class="chip">Circuit Debugging</li>
+          <li class="chip">Hardware Prototyping</li>
+          <li class="chip">Electronic Circuit Design</li>
+          <li class="chip">Design for Manufacturing (DFM)</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">Tools</h3>
+        <ul class="chip-row">
+          <li class="chip">Git</li>
+          <li class="chip">GitHub <span class="chip-tag">learning</span></li>
+          <li class="chip">VS Code</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3 class="skill-group-title">Areas of Interest</h3>
+        <ul class="chip-row">
+          <li class="chip">PCB Design</li>
+          <li class="chip">Hardware Design</li>
+          <li class="chip">Robotics</li>
+          <li class="chip">Electronics</li>
+          <li class="chip">Industrial Automation</li>
+          <li class="chip">Embedded Systems <span class="chip-tag">learning</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section class="section" id="experience">
+    <p class="section-eyebrow">C3 · experience</p>
+    <h2 class="section-title">Experience</h2>
+
+    <ol class="timeline">
+      <li class="timeline-item" data-reveal>
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-head">
+            <h3>Team Leader</h3>
+            <span class="timeline-date">ABU Robocon 2026 · 2026</span>
+          </div>
+          <ul>
+            <li>Led the team at the international-level ABU Robocon 2026; shortlisted for National Selection.</li>
+            <li>Contributed to hardware development, embedded programming and robotic system integration.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-reveal>
+        <div class="timeline-node"></div>
+        <div class="timeline-card">
+          <div class="timeline-head">
+            <h3>Robotics Innovation Hackathon</h3>
+            <span class="timeline-date">IEEE Robotic Society · 2026</span>
+          </div>
+          <ul>
+            <li>Submitted an idea for Round 1; result awaited.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" id="projects">
+    <p class="section-eyebrow">C4 · projects</p>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">A few boards and bots from the workbench.</p>
+
+    <div class="project-grid" data-reveal>
+
+      <article class="project-card">
+
+        <div class="project-image">
+
+    <img
+        src="assets/images/Projects/rp2040\pcb-layout.png"
+        alt="Custom RP2040 Development Board">
+
+</div>
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>Custom 4-Layer RP2040 Dev Board</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>Compact 4-layer RP2040 development board inspired by the Seeed Studio XIAO RP2040.</li>
+          <li>Full schematic, BOM and PCB layout in EasyEDA Pro; verified with ERC and DRC checks.</li>
+          <li>Next phase: PCB fabrication and hardware bring-up/testing.</li>
+        </ul>
+      <div class="project-tags">
+    <span class="tag">RP2040</span>
+    <span class="tag">4-Layer PCB</span>
+    <span class="tag">EasyEDA Pro</span>
+</div>
+
+<div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/RP2040-Development-board"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+      <article class="project-card">
+         <div class="project-image">
+
+    <img
+        src="assets/images/Projects/umc board/umc reference.png"
+        alt="Developing UMC Board">
+
+</div>
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>Universal Embedded Mini Controller (UMC Board)</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>40&nbsp;mm × 40&nbsp;mm embedded controller board for general-purpose embedded applications.</li>
+          <li>Modular, expandable architecture planned as a compact embedded motherboard.</li>
+          <li>Targeted at robotics and IoT applications.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Embedded Systems</span><span class="tag">IoT</span><span class="tag">PCB Design</span>
+    <span class="tag">40x40 compact design</span>
+    <span class="tag">EasyEDA Pro</span>
+
+           <span class="tag">!!!‼️     On-Going_Process     ‼️!!!</span>
+</div>
+
+<div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/umc_board"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+      <article class="project-card">
+         <div class="project-image">
+
+    <img
+        src="assets/images/Projects/seed sower/seed sower.png"
+        alt="Autonomous Seed Sowing Robot">
+
+</div>
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>Autonomous Seed Sowing Robot</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>Working prototype for automated seed sowing.</li>
+          <li>Built an autonomous seed sowing robot for automatic navigation and precision seed planting.</li>
+          <li>Integrated Arduino, ultrasonic sensors, and a servo-based seed dispensing system for reliable operation.</li>
+          <li>Successfully demonstrated obstacle avoidance and uniform seed sowing through prototype testing.</li>
+          <li>Planned future upgrades include ROS 2, SLAM, LiDAR, AI vision, GPS, and cloud connectivity for fully autonomous smart farming.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Robotics</span><span class="tag">Automation</span><span class="tag">SLAM</span>
+        </div>
+      <div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/autonomous_seed_sower"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>AI-Based Warehouse Automation</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>Authored and submitted an automation concept proposal to RIH.</li>
+          <li>Event conducted by the IEEE Robotics Society.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Automation</span><span class="tag">Concept Design</span>
+        </div>
+      <div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/umc_board"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>Obstacle Avoidance &amp; Flame Detection Robots</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>Sensor-driven robots built during early hands-on robotics and embedded systems learning.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Sensors</span><span class="tag">Robotics</span>
+        </div>
+      <div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/umc_board"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+      <article class="project-card">
+        <div class="project-card-head">
+          <span class="mount-hole"></span>
+          <h3>Arduino Light Control PCB</h3>
+          <span class="mount-hole"></span>
+        </div>
+        <ul>
+          <li>Designed and practiced schematic-to-PCB workflows.</li>
+          <li>Built foundational PCB layout skills.</li>
+        </ul>
+        <div class="project-tags">
+          <span class="tag">Arduino</span><span class="tag">PCB Practice</span>
+        </div>
+      <div class="project-actions">
+
+    <a href="https://github.com/GiriSankar075/umc_board"
+       target="_blank"
+       class="btn btn-copper">
+
+        GitHub Repository →
+
+    </a>
+
+</div>
+
+</article>
+
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION + ACHIEVEMENTS ============ -->
+  <section class="section" id="education">
+    <p class="section-eyebrow">C5 · education</p>
+    <h2 class="section-title">Education &amp; achievements</h2>
+
+    <div class="edu-grid">
+      <div class="edu-card" data-reveal>
+        <h3>B.E. Mechatronics Engineering</h3>
+        <p class="edu-sub">Hindusthan College of Engineering and Technology, Tamil Nadu</p>
+        <p class="edu-meta">2024 – 2028 · CGPA 8.4 / 10</p>
+      </div>
+
+      <div class="edu-card" data-reveal>
+        <h3>Achievements &amp; Certifications</h3>
+        <ul class="cert-list">
+          <li>
+            <svg class="cert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            NPTEL Elite Certification — "Introduction to Industry 4.0 and Industrial Internet of Things," IIT Kharagpur (Jan–Apr 2026)
+ <div class="certificate-buttons">
+
+                <a href="assets/documents/Giri Sankar L NPTEL Certificate.pdf"
+                   class="btn btn-copper"
+                   target="_blank">
+
+                    Certificate
+
+                </a>
+          </li>
+          <li>
+            <svg class="cert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Team Leader, National-level ABU Robocon 2026 competition
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact-section" id="contact">
+    <p class="section-eyebrow">C6 · contact</p>
+    <h2 class="section-title">Let's build something</h2>
+    <p class="lead" data-reveal>
+      Open to internships and collaborations in PCB design, embedded systems
+      and robotics — ISRO internship included. Reach out on any channel below.
+    </p>
+
+    <div class="contact-grid" data-reveal>
+      <a class="contact-card" href="mailto:girisankarq015@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">girisankarq015@gmail.com</span>
+      </a>
+      <a class="contact-card" href="tel:+919025352317">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">+91 90253 52317</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/giri-sankar-36212933b" target="_blank" rel="noopener">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">giri-sankar-36212933b</span>
+      </a>
+      <a class="contact-card" href="https://github.com/GiriSankar075" target="_blank" rel="noopener">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">GiriSankar075</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Giri Sankar L. Built from schematic to soldered pixels.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
